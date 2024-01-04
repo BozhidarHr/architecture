@@ -1,20 +1,21 @@
 import 'package:architecture/views/contacts.dart';
 import 'package:architecture/views/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void main() {
+  setUrlStrategy(PathUrlStrategy());
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Architecture Website',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -34,28 +35,28 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const BasePage(body: Text("Home page")),
+        '/solutions': (context) => BasePage(body: BusinessContactsPage()),
+        '/gallery': (context) => BasePage(body: BusinessContactsPage()),
+        '/contacts': (context) => BasePage(body: BusinessContactsPage()),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class BasePage extends StatelessWidget {
+  final Widget body;
 
-  final String title;
+  const BasePage({super.key, required this.body});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: renderAppBar() as PreferredSizeWidget,
-        body: BusinessContactsPage(),
+        appBar: renderAppBar(context) as PreferredSizeWidget,
+        body: body,
       ),
     );
   }
