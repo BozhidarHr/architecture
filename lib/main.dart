@@ -1,7 +1,10 @@
 import 'package:architecture/views/contacts.dart';
 import 'package:architecture/views/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
+import 'views/gallery.dart';
 
 void main() {
   setUrlStrategy(PathUrlStrategy());
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const BasePage(body: Text("Home page")),
         '/solutions': (context) => BasePage(body: BusinessContactsPage()),
-        '/gallery': (context) => BasePage(body: BusinessContactsPage()),
+        '/gallery': (context) => BasePage(body: GalleryPage()),
         '/contacts': (context) => BasePage(body: BusinessContactsPage()),
       },
     );
@@ -56,8 +59,15 @@ class BasePage extends StatelessWidget {
     return SelectionArea(
       child: Scaffold(
         appBar: renderAppBar(context) as PreferredSizeWidget,
-        body: body,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 100),
+            child: body,
+          ),
+        ),
       ),
     );
   }
+
 }
+

@@ -28,7 +28,7 @@ Widget renderAppBar(BuildContext context) {
         ),
       ],
     ),
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.black.withOpacity(0.65),
     elevation: 0,
   );
 }
@@ -45,9 +45,9 @@ class _NavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
+        Navigator.of(context).pushNamed(
           route,
+          arguments: null,
         );
       },
       hoverColor: Color(0x307C2EFF),
